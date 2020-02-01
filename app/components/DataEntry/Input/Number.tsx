@@ -1,11 +1,13 @@
 import * as React from 'react';
 
-import * as S from './style';
+import * as S from './Number.style';
 
-type NumberProps = {};
+type InputNumberProps = {};
 
-type Props = NumberProps & React.HTMLAttributes<any>;
-
-const NumberInput: React.FunctionComponent<Props> = (props: Props) => {
-  return <S.NumberInput type="number" {...props} />;
+const InputNumber: React.FunctionComponent<
+  InputNumberProps & React.InputHTMLAttributes<any>
+> = props => {
+  return <S.InputNumber type="number" {...props} />;
 };
+
+export default InputNumber;
