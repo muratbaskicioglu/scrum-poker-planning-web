@@ -19,7 +19,7 @@ type PokerCardProps = {
 const PokerCard: React.FC<PokerCardProps> = ({
   symbol,
   children,
-  ...props
+  ...props,
 }) => {
   return <SPokerCard>{symbol}</SPokerCard>;
 };
