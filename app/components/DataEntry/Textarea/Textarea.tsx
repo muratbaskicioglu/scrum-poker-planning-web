@@ -4,10 +4,11 @@ import * as S from './Textarea.style';
 
 type TextareaProps = {};
 
-const Textarea: React.FC<TextareaProps & React.HTMLAttributes<any>> = ({
+const Textarea: React.FC<TextareaProps & React.TextareaHTMLAttributes<any>> = ({
   children,
+  ...props
 }) => {
-  return <S.Textarea>{children}</S.Textarea>;
+  return <S.Textarea {...props}>{children}</S.Textarea>;
 };
 
 export default Textarea;
