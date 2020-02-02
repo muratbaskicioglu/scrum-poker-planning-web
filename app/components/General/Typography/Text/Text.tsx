@@ -10,7 +10,7 @@ type TypographyTextProps = {
 
 const TypographyText: React.FC<TypographyTextProps> = ({
   children,
-  ...props
+  ...props,
 }) => {
   return <S.TypographyText {...props}>{children}</S.TypographyText>;
 };

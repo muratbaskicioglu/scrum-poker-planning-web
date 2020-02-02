@@ -5,20 +5,20 @@
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { applyMiddleware, createStore } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
-import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 import { InjectedStore, ApplicationRootState } from 'types';
 import { History } from 'history';
+import epics from './epics';
+
+import { createEpicMiddleware } from 'redux-observable';
 
 export default function configureStore(
   initialState: ApplicationRootState | {} = {},
   history: History,
 ) {
-  const reduxSagaMonitorOptions = {};
-  const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
+  const epicMiddleware = createEpicMiddleware();
 
-  const middlewares = [sagaMiddleware, routerMiddleware(history)];
-
+  const middlewares = [routerMiddleware(history), epicMiddleware];
   let enhancer = applyMiddleware(...middlewares);
 
   // If Redux Dev Tools and Saga Dev Tools Extensions are installed, enable them
@@ -38,16 +38,11 @@ export default function configureStore(
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
 
-  const store = createStore(
-    createReducer(),
-    initialState,
-    enhancer,
-  ) as InjectedStore;
+  const store = createStore(createReducer(), initialState, enhancer);
 
   // Extensions
-  store.runSaga = sagaMiddleware.run;
+  epicMiddleware.run(epics as any);
   store.injectedReducers = {}; // Reducer registry
-  store.injectedSagas = {}; // Saga registry
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */

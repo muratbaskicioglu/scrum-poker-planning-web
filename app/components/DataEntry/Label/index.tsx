@@ -6,7 +6,7 @@ type LabelProps = {};
 
 const Label: React.FC<LabelProps & React.LabelHTMLAttributes<any>> = ({
   children,
-  ...props
+  ...props,
 }) => {
   return <S.Label {...props}>{children}</S.Label>;
 };

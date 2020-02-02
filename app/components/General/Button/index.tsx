@@ -6,7 +6,7 @@ type ButtonProps = {};
 
 const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<any>> = ({
   children,
-  ...props
+  ...props,
 }) => {
   return <S.Button {...props}>{children}</S.Button>;
 };

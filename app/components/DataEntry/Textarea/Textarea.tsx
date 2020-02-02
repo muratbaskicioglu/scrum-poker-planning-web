@@ -6,7 +6,7 @@ type TextareaProps = {};
 
 const Textarea: React.FC<TextareaProps & React.TextareaHTMLAttributes<any>> = ({
   children,
-  ...props
+  ...props,
 }) => {
   return <S.Textarea {...props}>{children}</S.Textarea>;
 };
