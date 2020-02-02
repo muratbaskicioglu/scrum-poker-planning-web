@@ -7,7 +7,7 @@ import { Row, Col } from 'components/Layout/Grid';
 import Label from 'components/DataEntry/Label';
 import Input from 'components/DataEntry/Input';
 import Textarea from 'components/DataEntry/Textarea';
-import Button from 'components/DataEntry/Button';
+import Button from 'components/General/Button';
 
 import * as S from './style';
 

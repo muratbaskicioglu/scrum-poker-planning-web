@@ -22,7 +22,6 @@ const Component = () => null;
 
 const reducer = s => s;
 
-
 describe('injectReducer decorator', () => {
   let store;
   let ComponentWithReducer;
@@ -42,9 +41,7 @@ describe('injectReducer decorator', () => {
     injectors = {
       injectReducer: jest.fn(),
     };
-    ComponentWithReducer = injectReducer({ key: 'test', reducer: reducer })(
-      Component,
-    );
+    ComponentWithReducer = injectReducer({ key: 'test', reducer })(Component);
     jest.unmock('../reducerInjectors');
   });
 
@@ -63,18 +60,19 @@ describe('injectReducer decorator', () => {
   it('should set a correct display name', () => {
     expect(ComponentWithReducer.displayName).toBe('withReducer(Component)');
     expect(
-      injectReducer({ key: 'test', reducer: reducer })(() => null).displayName,
+      injectReducer({ key: 'test', reducer })(() => null).displayName,
     ).toBe('withReducer(Component)');
   });
 
   it('should propagate props', () => {
     const props = { testProp: 'test' };
-    const renderedComponent = renderer.create(
-      // tslint:disable-next-line:jsx-wrap-multiline
-      <Provider store={store}>
-        <ComponentWithReducer {...props} />
-      </Provider>,
-    )
+    const renderedComponent = renderer
+      .create(
+        // tslint:disable-next-line:jsx-wrap-multiline
+        <Provider store={store}>
+          <ComponentWithReducer {...props} />
+        </Provider>,
+      )
       .getInstance();
     if (!renderedComponent) {
       throw new Error();
@@ -104,7 +102,7 @@ describe('useInjectReducer hook', () => {
 
     store = configureStore({}, memoryHistory);
     ComponentWithReducer = () => {
-      useInjectReducer({ key: 'test', reducer: reducer });
+      useInjectReducer({ key: 'test', reducer });
       return null;
     };
   });

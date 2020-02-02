@@ -11,6 +11,7 @@ import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import AddStoryList from 'containers/add-story-list/Loadable';
+import ViewPlanning from 'containers/view-planning/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
@@ -19,6 +20,7 @@ export default function App() {
     <div>
       <Switch>
         <Route exact path="/" component={AddStoryList} />
+        <Route exact path="/view-planning" component={ViewPlanning} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
